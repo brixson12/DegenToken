@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract DegenToken is ERC20, Ownable {
     constructor() ERC20("DegenToken", "DGN") {
-        _mint(msg.sender, 100000000 * 10 ** 18); // Mint an initial supply of 100,000,000 DEGEN tokens
+        _mint(msg.sender,0); // Mint an initial supply of 1000 DEGEN tokens
     }
 
     // Mint new tokens (Only the owner can call this function)
