@@ -1,64 +1,34 @@
-# DegenToken
-This Solidity program is a simple "Hello World" program that demonstrates the basic syntax and functionality of the Solidity programming language. The purpose of this program is to serve as a starting point for those who are new to Solidity and want to get a feel for how it works.
+DegenToken Smart Contract
+Overview
+The DegenToken smart contract is an Ethereum-based ERC-20 token that allows you to create, manage, and transfer a custom token named "DegenToken" (symbol: "DGN"). This token contract is also integrated with the OpenZeppelin ERC-20 and Ownable contracts.
 
-## Description
+Prerequisites
+Before using this smart contract, you need to have the following:
 
-This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract has a single function that returns the string "Hello World!". This program serves as a simple and straightforward introduction to Solidity programming, and can be used as a stepping stone for more complex projects in the future.
+An Ethereum wallet to interact with the contract (e.g., MetaMask).
+Basic knowledge of Ethereum and smart contracts.
+Features
+Token Creation: The contract deploys with an initial supply of 1,000 DegenTokens. You can easily change this initial supply during deployment.
 
-## Getting Started
+Token Minting: The contract owner (address that deploys the contract) can mint new tokens. This function can be used to increase the token supply.
 
-### Executing program
+Token Transfer: Users can transfer DegenTokens to other addresses using the transferTokens function.
 
-To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
+Token Redemption: A function is provided for token redemption, assuming you have an in-game store where users can exchange tokens for in-game items. The redeemTokens function allows users to burn tokens and trigger your in-game logic.
 
-Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension Copy and paste the following code into the file:
+Check Token Balance: The contract includes a function to check the token balance of a specific address.
 
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+Token Burning: Users can burn their own tokens using the burnTokens function.
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+Deployment
+To deploy this contract, make sure you have the necessary environment set up. You can use tools like Remix, Truffle, or Hardhat to deploy the contract to the Ethereum network.
 
-contract DegenToken is ERC20, Ownable {
-    constructor() ERC20("DegenToken", "DGN") {
-        _mint(msg.sender, 100000000 * 10 ** 18); // Mint an initial supply of 100,000,000 DEGEN tokens
-    }
+Ensure you provide the initial supply of DegenTokens during deployment if you wish to change the default supply.
 
-    // Mint new tokens (Only the owner can call this function)
-    function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
-    }
+Usage
+After deployment, you can interact with the contract using the Ethereum wallet of the owner address (the address that deployed the contract).
 
-    // Transfer tokens
-    function transferTokens(address to, uint256 amount) public {
-        _transfer(msg.sender, to, amount);
-    }
+Please refer to the contract functions above to understand how to mint, transfer, redeem, check balances, and burn tokens.
 
-    // Redeem tokens (Assuming you have an in-game store)
-    function redeemTokens(uint256 amount) public {
-        _burn(msg.sender, amount);
-        // Add logic to provide in-game items here
-    }
-
-    // Check token balance
-    function balanceOf(address account) public view override returns (uint256) {
-        return super.balanceOf(account);
-    }
-
-    // Burn tokens
-    function burnTokens(uint256 amount) public {
-        _burn(msg.sender, amount);
-    }
-}
-
-
-To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.4" (or another compatible version), and then click on the "Compile HelloWorld.sol" button.
-
-Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Select the "HelloWorld" contract from the dropdown menu, and then click on the "Deploy" button.
-
-Once the contract is deployed, you can interact with it by calling the sayHello function. Click on the "HelloWorld" contract in the left-hand sidebar, and then click on the "sayHello" function. Finally, click on the "transact" button to execute the function and retrieve the "Hello World!" message.
-
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details
+License
+This smart contract is provided under the MIT License. You are free to use, modify, and distribute it as per the terms of the MIT License.
