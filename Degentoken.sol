@@ -30,8 +30,30 @@ contract DegenToken is ERC20, Ownable {
         return super.balanceOf(account);
     }
 
+     // Redeem tokens
+    function redeemTokens(string memory prizeSelection) public {
+        uint256 cost = prizeCosts[prizeSelection];
+        require(cost > 0, "Invalid prize selection");
+        require(balanceOf(msg.sender) >= cost, "Insufficient balance");
+
+        // Deduct the cost from the user's account
+        _burn(msg.sender, cost);
+
+        // Add your logic to provide the prize based on the prizeSelection here
+        // You can add code to give the user their in-game items or rewards
+
+        // Emit an event to indicate the redemption was successful
+        emit RedemptionSuccessful(msg.sender, prizeSelection);
+    }
+
+    event RedemptionSuccessful(address indexed user, string prizeSelection);
+
+    // Define the costs of each prize
+    mapping(string => uint256) public prizeCosts;
+
     // Burn tokens
     function burnTokens(uint256 amount) public {
         _burn(msg.sender, amount);
     }
 }
+
